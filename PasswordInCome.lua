@@ -4,7 +4,7 @@
 
 local folderPath = "/storage/emulated/0/"
 local filePath = folderPath .. "/a.txt"
-local expiryDuration = 1 * 10 --6 * 60 * 60 -- 6 hours
+local expiryDuration = 6 * 60 * 60 -- 6 hours
 
 local Passkey1 = "MainUpdate_Later"
 local Passkey2 = "Second_Update"
@@ -20,6 +20,7 @@ local keyLinks = {
 --      Utility Functions      --
 --=============================--
 
+-- Read saved keys and expiry times
 function readSavedKeys()
     local keys = {}
     local expiries = {}
@@ -43,6 +44,7 @@ function readSavedKeys()
     return keys, expiries
 end
 
+-- Save key and expiry to file
 function saveKey(step, value)
     local keys, expiries = readSavedKeys()
     keys[step] = value
@@ -66,6 +68,7 @@ end
 --         Key Prompt          --
 --=============================--
 
+-- Prompt user for the key
 function askKey(step)
     local correctKeys = {Passkey1, Passkey2, Passkey3}
     local link = keyLinks[step]
@@ -106,22 +109,22 @@ function askKey(step)
     end
 end
 
-
-
 --=============================--
 --          Main Flow          --
 --=============================--
 
+-- Start the key validation process
 function startKeySequence()
     local keys, expiries = readSavedKeys()
     local correctKeys = {Passkey1, Passkey2, Passkey3}
 
     for step = 1, 3 do
         local isValid = keys[step] == correctKeys[step] and expiries[step] and os.time() < expiries[step]
+
         if isValid then
-            gg.toast("✅ Key " .. step .. " already valid. Skipping...")
+            gg.toast("✅ Key " .. step .. " already validated. Skipping...")
         else
-            askKey(step)
+            askKey(step)  -- Prompt for the key if not validated
         end
     end
 

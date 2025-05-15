@@ -75,13 +75,13 @@ function askKey(step)
 
     while true do
         local input = gg.prompt(
-            {"Enter Key:", "Get Key"},
+            {"🔑 Enter Key:", "🔗 Get Key"},
             {"", false},
             {"text", "checkbox"}
         )
 
         if not input then
-            gg.toast("❌ Cancelled. Exiting script.")
+            gg.toast("❌ [Cancelled] Exiting script... Please try again later.")
             os.exit()
         end
 
@@ -90,21 +90,22 @@ function askKey(step)
 
         if getKey then
             gg.copyText(link)
-            gg.toast("📋 Link copied. Please get your key.")
+            gg.toast("📋 [LINK] New link copied. Please get your key from the link.")
         elseif entered == "" or entered == nil then
-            gg.alert("⚠️ Password cannot be empty.")
+            gg.alert("⚠️ [Empty Input] Password cannot be empty. Please enter a valid key.")
         elseif entered == correctKeys[step] then
             -- For Key 1 and Key 2, if the entered key is correct
             if step == 1 or step == 2 then
-                gg.alert("Key validation failed. New link generated.")
+                gg.alert("🔑 [Validation Failed] Key validation failed. New link generated.")
                 gg.copyText(link)  -- Provide new link
                 gg.toast("📋 New link copied to clipboard. Please get the correct key.")
             end
             saveKey(step, entered)
+            gg.toast("✅ [Success] Key " .. step .. " validated successfully!")
             return entered
         else
             -- If key is wrong for any step
-            gg.alert("❌ Wrong key! Please try again.")
+            gg.alert("❌ [Wrong Key] The key entered is incorrect. Please try again.")
         end
     end
 end
@@ -124,7 +125,7 @@ function startKeySequence()
 
         if isValid then
             -- If key is already valid, skip to the next one
-            gg.toast("✅ Key " .. step .. " already validated. Skipping...")
+            gg.toast("✅ [SKIPPED] Key " .. step .. " is already validated. Skipping...")
         else
             -- If the key is invalid or missing, ask for the key
             askKey(step)
@@ -132,7 +133,7 @@ function startKeySequence()
     end
 
     -- All keys validated successfully
-    gg.toast("🎉 All keys validated! Access granted.")
+    gg.toast("🎉 [SUCCESS] All keys validated! Access granted. Enjoy!")
 end
 
 startKeySequence()

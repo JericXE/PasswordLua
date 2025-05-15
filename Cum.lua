@@ -4,11 +4,11 @@
 
 local folderPath = "/storage/emulated/0/"
 local filePath = folderPath .. "/a.txt"
-local expiryDuration = 6 * 60 * 60 -- 6 hours
+local expiryDuration = 1 * 1 * 10 -- 6 hours
 
-local Passkey1 = "MainUpdate_Later"
-local Passkey2 = "Second_Update"
-local Passkey3 = "Final_Access"
+local Passkey1 = "1"
+local Passkey2 = "2"
+local Passkey3 = "3"
 
 local keyLinks = {
     [1] = "https://link-hub.net/167243/passkey-11",
@@ -97,7 +97,7 @@ function askKey(step)
             -- For Key 1 and Key 2, if the entered key is correct
             if step == 1 or step == 2 then
                 gg.alert("🔑 [Validation Failed] Key validation failed. New link generated.")
-                gg.copyText(link)  -- Provide new link
+                  -- Provide new link
                 gg.toast("📋 New link copied to clipboard. Please get the correct key.")
             end
             saveKey(step, entered)

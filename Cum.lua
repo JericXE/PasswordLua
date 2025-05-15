@@ -118,16 +118,20 @@ function startKeySequence()
     local keys, expiries = readSavedKeys()
     local correctKeys = {Passkey1, Passkey2, Passkey3}
 
+    -- Check the validity of each key in order
     for step = 1, 3 do
         local isValid = keys[step] == correctKeys[step] and expiries[step] and os.time() < expiries[step]
 
         if isValid then
+            -- If key is already valid, skip to the next one
             gg.toast("✅ Key " .. step .. " already validated. Skipping...")
         else
-            askKey(step)  -- Prompt for the key if not validated
+            -- If the key is invalid or missing, ask for the key
+            askKey(step)
         end
     end
 
+    -- All keys validated successfully
     gg.toast("🎉 All keys validated! Access granted.")
 end
 

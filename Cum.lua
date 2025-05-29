@@ -6,9 +6,9 @@ local folderPath = "/storage/emulated/0/"
 local filePath = folderPath .. "/a.txt"
 local expiryDuration = 1 * 2 * 60 -- 6 hours
 
-local Passkey1 = "1"
-local Passkey2 = "2"
-local Passkey3 = "3"
+local Passkey1 = "11"
+local Passkey2 = "22"
+local Passkey3 = "31"
 
 local keyLinks = {
     [1] = "https://link-hub.net/167243/passkey-11",

@@ -4,7 +4,7 @@
 
 local folderPath = "/storage/emulated/0/"
 local filePath = folderPath .. "/a.txt"
-local expiryDuration = 1 * 1 * 10 -- 6 hours
+local expiryDuration = 1 * 1 * 60 -- 6 hours
 
 local Passkey1 = "1"
 local Passkey2 = "2"
